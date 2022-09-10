@@ -2,6 +2,8 @@ package com.harunkor.recylerviewsample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.harunkor.recylerviewsample.databinding.ActivityMainBinding
@@ -135,7 +137,10 @@ class MainActivity : AppCompatActivity() {
             ClothesModel("Summer Dress","$139.99",R.drawable.summer_dress)
         )
 
-        val adapter = ClothesAdapter(list)
+        val adapter = ClothesAdapter(list) { item ->
+            Log.v("PATIKA","${item.title} - ${item.price}")
+            Toast.makeText(this@MainActivity, "${item.title} - ${item.price}", Toast.LENGTH_SHORT).show()
+        }
         val gridLayoutManager = GridLayoutManager(this,2)
         binding.apply {
             recyclerView.layoutManager = gridLayoutManager
